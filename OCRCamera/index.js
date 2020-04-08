@@ -21,7 +21,6 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 function mousePressed() {
-  console.log("sss");
   getDataFromCamera(imgToSend, key, getResult);
 }
 function getResult(data) {

@@ -7,11 +7,13 @@ function getDataFromCamera(imgDataBase64, apikey, callback) {
 function getDataFromBoth(imgData, imgDataBase64, apikey, callback) {
   //console.log(imgData);
   var formData = new FormData();
+  //
   if(imgData != null) {
     formData.append("file", imgData.file); // image from jpg or png (FROM DROP)
   }
   if(imgDataBase64 != null) {
-    formData.append("base64image", imgDataBase64.elt.toDataURL('image/png')); // image encodee from video capture (VIDEO CAPTURE)
+    console.log(imgDataBase64);
+    formData.append("base64image", imgDataBase64.elt.toDataURL('image/png', 1.0)); // image encodee from video capture (VIDEO CAPTURE)
   }
   formData.append("language", "eng"); // eng
   formData.append("apikey", apikey); // ADD API KEY !!!!
@@ -27,6 +29,7 @@ function getDataFromBoth(imgData, imgDataBase64, apikey, callback) {
     type: 'POST',
     timeout: 30000,
     success: function(ocrParsedResult) {
+      console.log("success");
       //Get the parsed results, exit code and error message and details
       var parsedResults = ocrParsedResult["ParsedResults"];
       var ocrExitCode = ocrParsedResult["OCRExitCode"];
@@ -87,6 +90,7 @@ function getDataFromBoth(imgData, imgDataBase64, apikey, callback) {
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log("error: " + jqXHR + " /// " + textStatus + " /// " + errorThrown);
+      console.log(jqXHR);
     },
   });
 }
